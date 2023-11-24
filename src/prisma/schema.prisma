@@ -16,15 +16,15 @@ model User {
   email String @unique
   senha String
   telefones Telefone[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  lastLogin DateTime?
+  data_criacao DateTime @default(now())
+  data_atualizacao DateTime @updatedAt
+  ultimo_login DateTime?
 }
 
 
 model Telefone {
   id Int      @id @default(autoincrement())
-  numero String @unique
+  numero String 
   ddd String
   userId String
   contato User @relation(fields: [userId], references: [id])
