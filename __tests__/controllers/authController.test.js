@@ -2,9 +2,9 @@
 /* eslint-disable no-undef */
 
 const request = require('supertest')
-const app = require('../../server')
+const app = require('../../src/server')
 const userMock = require('../userMock.json')
-const { prisma } = require('../../db/repositoryClient')
+const { prisma } = require('../../src/db/repositoryClient')
 
 
 describe('signIn', () => {
@@ -38,6 +38,7 @@ describe('signIn', () => {
 		const response = await request(app).post('/api/signin')
 			.send({email, senha})
 
+		expect(response.status).toBe(200)
 		expect(response.body).toEqual({
 			id: expect.any(String),
 			data_criacao: expect.any(String),
@@ -80,11 +81,11 @@ describe('signUp', () => {
 	it('Criacao de cadastro c/ sucesso', async()=>{
 		const usuarioParaCadastro = {...userMock}
 		usuarioParaCadastro.email = 'emailNovoUsuario@example.com'
-		console.log()
 		const {nome, email, senha, telefones } = usuarioParaCadastro
 		const response = await request(app).post('/api/signup')
 			.send({nome, email, senha, telefones})
-
+		
+		expect(response.status).toBe(201)
 		expect(response.body).toEqual({
 			id: expect.any(String),
 			data_criacao: expect.any(String),
@@ -93,7 +94,7 @@ describe('signUp', () => {
 			token: expect.any(String),
 		})
 
-	}, 25000)
+	})
 
 
 	/*

@@ -1,3 +1,5 @@
+const { TOKEN_ERROR_MESSAGES, ERROR_SERVER_MESSAGES } = require('../constants/apiMensagensResponse')
+const { HTTP_STATUS_ERROR_SERVER } = require('../constants/apiStatusResponse')
 const {prisma} = require('../db/repositoryClient')
 
 async function getInfo(req, res) {
@@ -21,12 +23,12 @@ async function getInfo(req, res) {
 		})
 
 		if (!usuario) {
-			return res.json({mensagem: 'Não autorizado'})
+			return res.json({mensagem: TOKEN_ERROR_MESSAGES.INVALID_TOKEN})
 		}
 
 		return res.json(usuario)
 	} catch (error) {
-		console.log(error)
+		return res.status(HTTP_STATUS_ERROR_SERVER.INTERNAL_SERVER_ERROR).json({mensagem: ERROR_SERVER_MESSAGES.INTERNAL_ERROR_SERVER})
 	}
 }
 

@@ -1,31 +1,33 @@
 /* eslint-disable no-undef */
 const jwt = require('jsonwebtoken')
+const { HTTP_STATUS_ERROR_CLIENT } = require('../constants/apiStatusResponse')
+const { TOKEN_ERROR_MESSAGES } = require('../constants/apiMensagensResponse')
 
 function verificarToken(req, res, next) {
 	const header = req.headers.authentication
 
 	if (!header) {
-		return res.status(401).json({ mensagem:'Não autorizado' })
+		return res.status(HTTP_STATUS_ERROR_CLIENT.UNAUTHORIZED).json({ mensagem: TOKEN_ERROR_MESSAGES.INVALID_TOKEN })
 	}
 
 	const token = header.split(' ')[1]
 
 	try {
-		const {id, iat} = jwt.verify(token, process.env.SECRET)
+		const {id, exp} = jwt.verify(token, process.env.SECRET)
 		
-		const agoraEmSegundos = Math.floor(Date.now()/1000)
-
-		const trintaMinutosEmSegundos = 1800
-
-		if (agoraEmSegundos - iat > trintaMinutosEmSegundos) {
-			return res.json({mensagem: 'Sessão inválida'})
+		if (Date.now() >= exp * 1000) {
+			return res.json({mensagem: TOKEN_ERROR_MESSAGES.EXPIRED_TOKEN})
 		}
 		req.user = {
 			id: id
 		}
 		next()
 	} catch (error) {
-		return res.json({ mensagem: 'Não autorizado' })
+		console.log(error)
+		if (error.name === 'TokenExpiredError') {
+			return res.json({mensagem: TOKEN_ERROR_MESSAGES.EXPIRED_TOKEN})
+		}
+		return res.json({ mensagem: TOKEN_ERROR_MESSAGES.INVALID_TOKEN })
 	}
 }
 

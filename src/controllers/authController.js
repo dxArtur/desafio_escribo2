@@ -2,6 +2,8 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const {prisma} = require('../db/repositoryClient')
+const {HTTP_STATUS_SUCESS, HTTP_STATUS_ERROR_CLIENT, HTTP_STATUS_ERROR_SERVER} = require('../constants/apiStatusResponse')
+const { ERROR_CLIENT_MESSAGES, ERROR_SERVER_MESSAGES } = require('../constants/apiMensagensResponse')
 
 async function signIn(req, res) {
 	try {
@@ -13,11 +15,11 @@ async function signIn(req, res) {
 		})
 
 		if (!usuario) {
-			return res.json({ mensagem: 'Usuário e/ou senha inválidos' })
+			return res.json({ mensagem: ERROR_CLIENT_MESSAGES.BAD_AUTH })
 		}
         
 		if (! (bcrypt.compareSync(senha, usuario.senha))) {
-			return res.status(401).json({ mensagem: 'Usuário e/ou senha inválidos' })
+			return res.status(HTTP_STATUS_ERROR_CLIENT.UNAUTHORIZED).json({ mensagem: ERROR_CLIENT_MESSAGES.BAD_AUTH })
 
 		}
 
@@ -43,9 +45,10 @@ async function signIn(req, res) {
 		})
         
 
-		return res.json({'id':id, 'data_criacao':data_criacao_br, 'data_atualizacao':data_atualizacao_br, 'ultimo_login':ultimo_login_br, 'token':token})
+		return res.status(HTTP_STATUS_SUCESS.OK).json({'id':id, 'data_criacao':data_criacao_br, 'data_atualizacao':data_atualizacao_br, 'ultimo_login':ultimo_login_br, 'token':token})
 	} catch (error) {
-		console.log(error)    }
+		return res.status(HTTP_STATUS_ERROR_SERVER.INTERNAL_SERVER_ERROR).json({mensagem: ERROR_SERVER_MESSAGES.INTERNAL_ERROR_SERVER})
+	}
 }
 
 async function signUp(req, res){
@@ -90,16 +93,16 @@ async function signUp(req, res){
 				const data_atualizacao_br = data_atualizacao ? data_atualizacao.toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo'}) : null
 				const ultimo_login_br = ultimo_login ? ultimo_login.toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo'}) : null
 
-				return res.json({'id':id, 'data_criacao':data_criacao_br, 'data_atualizacao':data_atualizacao_br, 'ultimo_login':ultimo_login_br, 'token':token})
+				return res.status(HTTP_STATUS_SUCESS.CREATED).json({'id':id, 'data_criacao':data_criacao_br, 'data_atualizacao':data_atualizacao_br, 'ultimo_login':ultimo_login_br, 'token':token})
 			}
 		}
 
 
         
-		return res.json({mensagem: 'E-mail já existente'})
+		return res.json({mensagem: ERROR_CLIENT_MESSAGES.EMAIL_HAS_USED})
 
 	} catch (error) {
-		console.log(error)
+		return res.status(HTTP_STATUS_ERROR_SERVER.INTERNAL_SERVER_ERROR).json({mensagem: ERROR_SERVER_MESSAGES.INTERNAL_ERROR_SERVER})
 	}
 }
 
