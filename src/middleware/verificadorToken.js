@@ -23,7 +23,6 @@ function verificarToken(req, res, next) {
 		}
 		next()
 	} catch (error) {
-		console.log(error)
 		if (error.name === 'TokenExpiredError') {
 			return res.json({mensagem: TOKEN_ERROR_MESSAGES.EXPIRED_TOKEN})
 		}

@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable quotes */
+/* eslint-disable linebreak-style */
 /* eslint-disable indent */
 /**
  * For a detailed explanation regarding each configuration property, visit:
@@ -82,16 +84,16 @@ const config = {
   // ],
 
   // An array of file extensions your modules use
-  // moduleFileExtensions: [
-  //   "js",
+  moduleFileExtensions: [
+     "js",
   //   "mjs",
   //   "cjs",
   //   "jsx",
   //   "ts",
   //   "tsx",
-  //   "json",
-  //   "node"
-  // ],
+     "json",
+     "node"
+  ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},

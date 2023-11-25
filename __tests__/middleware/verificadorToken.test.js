@@ -39,7 +39,6 @@ describe('Middleware verificarToken', () => {
 			.post('/api/signin')
 			.send({ email, senha})
 		const token = responseAuth.body.token
-		console.log(token)
 
     
 		const response = await request(app)
