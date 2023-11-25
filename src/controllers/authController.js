@@ -43,7 +43,7 @@ async function signIn(req, res) {
 		})
         
 
-		return res.json({id, data_criacao_br, data_atualizacao_br, ultimo_login_br, token})
+		return res.json({'id':id, 'data_criacao':data_criacao_br, 'data_atualizacao':data_atualizacao_br, 'ultimo_login':ultimo_login_br, 'token':token})
 	} catch (error) {
 		console.log(error)    }
 }
@@ -90,7 +90,7 @@ async function signUp(req, res){
 				const data_atualizacao_br = data_atualizacao ? data_atualizacao.toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo'}) : null
 				const ultimo_login_br = ultimo_login ? ultimo_login.toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo'}) : null
 
-				return res.status(201).json({id, data_criacao_br, data_atualizacao_br, ultimo_login_br, token})
+				return res.json({'id':id, 'data_criacao':data_criacao_br, 'data_atualizacao':data_atualizacao_br, 'ultimo_login':ultimo_login_br, 'token':token})
 			}
 		}
 

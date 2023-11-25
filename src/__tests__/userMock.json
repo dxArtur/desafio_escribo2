@@ -1,0 +1,7 @@
+{
+    "id":"6dd022c9-6beb-4454-a65f-be5a9e8990a1",
+    "nome": "Daniel Artur",
+    "email": "emailtestedodaniel@example.com",
+    "senha": "senha123",
+    "telefones": [{ "numero": "123456789", "ddd": "11" }]
+}

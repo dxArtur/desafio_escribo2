@@ -1,7 +1,8 @@
-const prisma = require('../db/repositoryClient')
+const {prisma} = require('../db/repositoryClient')
 
 async function getInfo(req, res) {
 	try {
+
 		const usuario = await prisma.user.findUnique({
 			where:{
 				id: req.user.id
@@ -12,12 +13,17 @@ async function getInfo(req, res) {
 				email:true,
 				telefones: {
 					select: {
-						ddd: true,
-						numero: true
+						numero: true,
+						ddd: true
 					}
 				}
 			}
 		})
+
+		if (!usuario) {
+			return res.json({mensagem: 'Não autorizado'})
+		}
+
 		return res.json(usuario)
 	} catch (error) {
 		console.log(error)

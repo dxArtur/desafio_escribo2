@@ -27,5 +27,5 @@ model Telefone {
   numero String 
   ddd String
   userId String
-  contato User @relation(fields: [userId], references: [id])
+  contato User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken')
 
 function verificarToken(req, res, next) {
-	const header = req.headers.authorization
+	const header = req.headers.authentication
 
 	if (!header) {
 		return res.status(401).json({ mensagem:'Não autorizado' })
@@ -12,6 +12,7 @@ function verificarToken(req, res, next) {
 
 	try {
 		const {id, iat} = jwt.verify(token, process.env.SECRET)
+		
 		const agoraEmSegundos = Math.floor(Date.now()/1000)
 
 		const trintaMinutosEmSegundos = 1800
