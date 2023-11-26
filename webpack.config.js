@@ -19,6 +19,10 @@ module.exports = {
 		{
 			test: /\.html$/,
 			use: 'html-loader',
+		},
+		{
+			test: /\.cs$/,
+			use: 'raw-loader',
 		}
 		]
 	},
@@ -27,9 +31,12 @@ module.exports = {
 			'fs': false,
 			'path': false,
 			'crypto': false,
+			'bcrypt': false,
 			'nock': false,
 			'mock-aws-s3': false,
 			'aws-sdk':false,
+			'html-loader':false,
+			'raw-loader':false,
 			// Adicione outros módulos do Node.js, se necessário
 		}
 	},
