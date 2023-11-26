@@ -10,22 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
+model User {
   id       String      @id @default(uuid())
   nome String
   email String @unique
   senha String
-  telefones telefone[]
+  telefones Telefone[]
   data_criacao DateTime @default(now())
   data_atualizacao DateTime @updatedAt
   ultimo_login DateTime?
 }
 
 
-model telefone {
+model Telefone {
   id Int      @id @default(autoincrement())
   numero String 
   ddd String
   userId String
-  contato user @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contato User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

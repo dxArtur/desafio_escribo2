@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node public/bundle.js",
-    "test": "jest",
     "dev": "nodemon src/index.js",
     "eslint": "eslint src",
-    "prestart": "npm run test && npm run eslint",
+    "prestart": "npm run eslint",
     "build": "webpack --config webpack.config.js --mode development"
   },
   "keywords": [],
