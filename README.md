@@ -6,7 +6,7 @@
 <h3>Requisitos técnicos</h3>
 <ul>
 	<li>Framework: Express :computer:</li>
-	<li>Task runner: Express :athletic_shoe:</li>
+	<li>Task runner: Npm script :athletic_shoe:</li>
 	<li>Webpack para buildar a aplicação:package:</li>
 	<li>Gerenciamento de dependências: npm :hammer_and_wrench: </li>
 	<li>Criptografia: bcryptjs :lock: </li>
