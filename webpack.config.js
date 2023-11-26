@@ -15,14 +15,22 @@ module.exports = {
 			test: /\.js$/,
 			exclude: /node_modules/,
 			use: 'babel-loader'
-		}]
+		},
+		{
+			test: /\.html$/,
+			use: 'html-loader',
+		}
+		]
 	},
 	resolve: {
 		fallback: {
 			'fs': false,
 			'path': false,
 			'crypto': false,
+			'nock': false,
+			'mock-aws-s3': false,
+			'aws-sdk':false,
 			// Adicione outros módulos do Node.js, se necessário
 		}
-	}
+	},
 }
