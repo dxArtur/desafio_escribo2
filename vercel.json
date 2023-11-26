@@ -3,7 +3,7 @@
     "builds": [
         {
             "src": "./public/bundle.js",
-            "use": "vercel/code"
+            "use": "@vercel/node"
         }
     ],
     "routes": [
