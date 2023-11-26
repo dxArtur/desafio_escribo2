@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const {prisma} = require('../db/repositoryClient')
 const {HTTP_STATUS_SUCESS, HTTP_STATUS_ERROR_CLIENT, HTTP_STATUS_ERROR_SERVER} = require('../constants/apiStatusResponse')
