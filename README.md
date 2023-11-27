@@ -1,6 +1,6 @@
 <h1>Desafio Escribo 2</h1>
 <h2> API para exibir informações de usuários autenticados</h2>
-<h6> Aviso o servidor pode demorar um pouco a responder algumas requisições devido a natureza gratuita da hospedagem</h6>
+<h6> Aviso!!! o servidor pode demorar um pouco a responder algumas requisições devido a natureza gratuita da hospedagem</h6>
 
 <h2>Decrição do projeto</h2>
 <h3>Requisitos técnicos</h3>
@@ -12,6 +12,7 @@
 	<li>Criptografia: bcryptjs :lock: </li>
 	<li>Autenticação: Jsonwebtoken :clipboard: </li>
 	<li>Padronização: EsLint :bar_chart: </li>
+	<li>Persistência de dados: PostgreSQL (Prisma ORM) :elephant: </li>
 	<li>Testes Unitários: Jest :mag: </li>
 
 </ul>
@@ -62,7 +63,7 @@
 "email": "SeuEmail@example.com",
 "senha": "senha123",
 "telefones": [ {"numero": "123456789", "ddd": "11"}] 
-}</p>
+}
 
 
 
